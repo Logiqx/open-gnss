@@ -1,4 +1,4 @@
-## Open GPS - Thoughts and Ideas
+## Open GNSS - Thoughts and Ideas
 
 This is a community-wide initiative but the GitHub project and initial thoughts and ideas were created on GitHub by Michael George (K888).
 

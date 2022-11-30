@@ -1,4 +1,4 @@
-## Open GPS Format
+## Open GNSS Format
 
 ### Introduction
 

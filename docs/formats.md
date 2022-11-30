@@ -1,4 +1,4 @@
-## Open GPS - Existing Formats
+## Open GNSS - Existing Formats
 
 This document contains some details about existing file formats and their contents.
 

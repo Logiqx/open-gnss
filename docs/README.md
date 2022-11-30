@@ -1,4 +1,4 @@
-## Open GPS Format
+## Open GNSS Format
 
 ### Introduction
 
@@ -132,7 +132,7 @@ This is a community-wide initiative but the GitHub project and initial thoughts 
 
 The open format needs to be devised, reviewed, discussed, tweaked and so forth. Early thoughts and ideas have been captured in separate document:
 
-- [Open GPS - Thoughts and Ideas](thoughts.md)
+- [Open GNSS - Thoughts and Ideas](thoughts.md)
 
 The above is by no means the finished article. It is simply the product of a few hours work and something of an in-depth brain dump.
 
