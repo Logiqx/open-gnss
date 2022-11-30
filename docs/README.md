@@ -4,13 +4,13 @@
 
 The GPS speedsurfing community have used a number of different GPS devices over the years, several of which have had their own proprietary file formats. Common file formats include:
 
-- Flexible and Interoperable Data Transfer (FIT).
-- GPS Exchange Format (GPX).
-- National Marine Electronics Association (NMEA).
-- OnAndOn (OAO) binary from the Motion GPS.
-- SiRF Binary (SBN) from Locosys.
-- SiRF Binary Packed (SBP) from Locosys.
-- u-blox (UBX) binary.
+- Flexible and Interoperable Data Transfer (FIT)
+- GPS Exchange Format (GPX)
+- National Marine Electronics Association (NMEA)
+- OnAndOn (OAO) binary from the Motion GPS
+- SiRF Binary (SBN) from Locosys
+- SiRF Binary Packed (SBP) from Locosys
+- u-blox (UBX) binary
 
 The above formats all have their pros / cons and their suitability is very much dependent on the specific use-case, device, GNSS chipset, etc, 
 
@@ -78,11 +78,7 @@ Possible future requirements:
 
 #### Native Frame Support
 
-The file will need to contain specifications of the frame types and the associated data items.
-
-The data items within say a GNSS frame may be a minimal set of data items or an extensive list.
-
-The frame specifications make it possible to copy entire payloads or specific data items from the binary payloads of the GNSS chip; SiRF or u-blox.
+The file will need to contain specifications of the frame types and the associated data items. The data items within say a GNSS frame may be a minimal set of data items or an extensive list. The frame specifications make it possible to copy entire payloads or specific data items from the binary payloads of the GNSS chip; SiRF or u-blox.
 
 The file reader will not need to treat different logging devices or GNSS chipsets any differently since the frame specifications will be standard.
 
@@ -90,9 +86,7 @@ The file reader will not need to treat different logging devices or GNSS chipset
 
 #### Formats
 
-It should be (theoretically) possible to convert any existing files to the open format.
-
-Converting to the open format then back to the original format needn't be implemented but it should (theoretically) be lossless.
+It should be (theoretically) possible to convert any existing files to the open format. Converting to the open format then back to the original format needn't be implemented but it should (theoretically) be lossless.
 
 The open format should therefore have the ability to store precise data from the following existing formats and associated GNSS chipsets:
 
@@ -128,12 +122,10 @@ Further details about these existing formats is provided on a separate [page](fo
 
 ### Next Steps
 
-This is a community-wide initiative but the GitHub project and initial thoughts and ideas were created on GitHub by Michael George (K888).
-
-The open format needs to be devised, reviewed, discussed, tweaked and so forth. Early thoughts and ideas have been captured in separate document:
+This is a community-wide initiative but the GitHub project and initial thoughts and ideas were created on GitHub by Michael George (K888). The open format needs to be devised, reviewed, discussed, tweaked and so forth. Early thoughts and ideas have been captured in separate document:
 
 - [Open GNSS - Thoughts and Ideas](thoughts.md)
 
 The above is by no means the finished article. It is simply the product of a few hours work and something of an in-depth brain dump.
 
-All feedback welcome. Feel free to contact me via Seabreeze (or e-mail if you have it) and I will get back to you when time allows.
+All feedback is welcome. Feel free to contact me via Seabreeze (or e-mail if you have it) and I will get back to you when time allows.

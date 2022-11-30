@@ -1,10 +1,8 @@
 ## Open GNSS - Thoughts and Ideas
 
-This is a community-wide initiative but the GitHub project and initial thoughts and ideas were created on GitHub by Michael George (K888).
+This is a community-wide initiative but the GitHub project and initial thoughts and ideas were created on GitHub by Michael George (K888). This is by no means the finished article. It is simply the product of a few hours work and is something of an in-depth brain dump.
 
-This is by no means the finished article. It is simply the product of a few hours work and is something of an in-depth brain dump.
-
-All feedback welcome. Feel free to contact me via Seabreeze (or e-mail if you have it) and I will get back to you when time allows.
+All feedback is welcome. Feel free to contact me via Seabreeze (or e-mail if you have it) and I will get back to you when time allows.
 
 
 
@@ -46,7 +44,7 @@ GNSS frame definitions will detail the content of the GNSS frames:
 
 It should be noted that optimal byte alignment is retained for these frames because every item specification is exactly 4 bytes.
 
-Multiple frame types can be included in a file using the open GNSS format (e.g. corresponding to NMEA sentence types). The numerical GNSS frame identifiers will be implicit with the file, simply based on the order of frame definitions.
+Multiple frame types can be included in a file using the open GNSS format (e.g. corresponding to NMEA sentence types). The numerical GNSS frame identifiers will be implicit within the file, simply based on the order of frame definitions.
 
 
 
@@ -56,9 +54,9 @@ This section illustrates how minimal SiRF and u-blox GNSS frames might be implem
 
 - Simple to implement within logging devices with a low computational cost.
 - Slightly more complex when reading the files but all possible data type conversions can be achieved using simple, common code.
-- The definition frames facilitate the processing of SiRF and u-blox data in exactly the same way, despite differing endian, byte sizes and / or precisions.
+- The GNSS frame definitions facilitate the processing of SiRF and u-blox payloads in exactly the same way, regardless of endian, byte sizes, or scaling / precision.
 
-It's worth noting that byte offsets / alignments have been chosen to suit the underlying data types (e.g. 4 byte integers aligned with 4-byte boundaries) Failure to align data types properly can lead to sub-optimal processing, depending on the CPU architecture.
+It's worth noting that byte offsets / alignments have been chosen to suit the underlying data types (e.g. 4 byte data types are aligned with 4-byte boundaries). Failure to align data types properly can lead to sub-optimal processing, depending on the CPU architecture.
 
 
 
@@ -104,8 +102,9 @@ TOTAL = 29 bytes
 
 Notes:
 
-- The order of the elements has been chosen to ensure optimal byte alignments for the underlying types.
-- sAcc is output by u-blox chipsets using 4 bytes but this proposal suggests 2 bytes.
+- Some of these data items have a higher precision that the SiRF equivalent but this is easy to handle for the reader.
+- The order of the elements is the same as the SiRF example and also uses the optimal byte alignments.
+- sAcc is output by u-blox chipsets using 4 bytes but this example only uses 2 bytes:
   - This will result in a max sAcc value of 65.535 m/s, approximately ~130 knots.
   - TBC - This 130 knot limit for sAcc must surely be acceptable? What is the largest sAcc ever seen in a u-blox file?
   
@@ -132,8 +131,8 @@ Custom GNSS frames can be logged for development purposes and detailed analysis,
 
 Examples of more "unusual" data items which are not currently used for speed sailing:
 
-- elevation (ele)
-- rate of climb (roc)
+- Elevation (ele)
+- Rate of climb (roc)
 - NED velocities - north / east / down (down velocity = -1 * roc)
   - Logged by the u-blox [FlySight](https://www.flysight.ca/) device used by skydivers.
 
@@ -146,11 +145,11 @@ Examples of more "unusual" data items which are not currently used for speed sai
 - hAcc / vAcc / tAcc
   - u-blox accuracy data
 
-- satellite IDs
-- fix type
-- flags
+- Satellite IDs
+- Fix type
+- Flags
 
-Since additional fields are just a change to the GNSS frame definition, reader software that does not recognise "unusual" data items can simply ignore them whilst parsing the data.
+Since additional fields are just a change to the GNSS frame definition, software reading the file can easily ignore "unusual" data items whilst parsing the data.
 
 
 

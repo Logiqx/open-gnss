@@ -4,13 +4,13 @@
 
 The GPS speedsurfing community have used a number of different GPS devices over the years, several of which have had their own proprietary file formats. Common file formats include:
 
-- Flexible and Interoperable Data Transfer (FIT).
-- GPS Exchange Format (GPX).
-- National Marine Electronics Association (NMEA).
-- OnAndOn (OAO) binary from the Motion GPS.
-- SiRF Binary (SBN) from Locosys.
-- SiRF Binary Packed (SBP) from Locosys.
-- u-blox (UBX) binary.
+- Flexible and Interoperable Data Transfer (FIT)
+- GPS Exchange Format (GPX)
+- National Marine Electronics Association (NMEA)
+- OnAndOn (OAO) binary from the Motion GPS
+- SiRF Binary (SBN) from Locosys
+- SiRF Binary Packed (SBP) from Locosys
+- u-blox (UBX) binary
 
 The above formats all have their pros / cons and their suitability is very much dependent on the specific use-case, device, GNSS chipset, etc, 
 
