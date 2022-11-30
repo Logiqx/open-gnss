@@ -10,12 +10,12 @@ All feedback is welcome. Feel free to contact me via Seabreeze (or e-mail if you
 
 A number of items will be required in the file header. These could include the following:
 
-- Frame identifier (0x00 = header) + size = 2 bytes
-- Checksum = 2 bytes
-- Version number = 4 bytes [semantic versioning](https://semver.org/) to cater for the unlikely event of breaking changes in the future
-- Epoch = 8 byte timestamp for first GNSS frame with millisecond precision
-- Endian (big or little) so that native binary payloads from SiRF and u-blox chipsets can be used without modification
-- Compression type = 0x00 for potential future usage
+- **Frame identifier (0x00 = header) + size** = 2 bytes
+- **Checksum** = 2 bytes
+- **Version number** = 4 bytes [semantic versioning](https://semver.org/) to cater for the unlikely event of breaking changes in the future
+- **Epoch** = 8 byte timestamp for first GNSS frame with millisecond precision
+- **Endian (big or little)** so that native binary payloads from SiRF and u-blox chipsets can be used without modification
+- **Compression type** = 0x00 for potential future usage
 - GNSS chipset manufacturer, if known (2 bytes) - e.g. 0x0000 = unknown, 0x0001 = SiRF, 0x0002 = Trimble, 0x0003 = u-blox, etc.
 - GNSS chipset model, if known (2 bytes) - e.g. 0x0000 = unknown, 0x0001 = SiRF Star II, 0x0002 = SirF Star III, etc.
 - Logging device manufacturer, if known (2 bytes) - e.g. 0x0000 = unspecified, 0x0001 = Locosys, etc.
@@ -26,7 +26,9 @@ A number of items will be required in the file header. These could include the f
 
 I have no doubt that other fields will be required and they can be added over time in a non-breaking manner.
 
-Results summaries have yet to be tackled - e.g. best 2s, 10s, 500m, etc.
+A header frame definition should be implemented (not documented yet) so that smaller headers can be used, when desired. This would work in a similar way to the GNSS Frame definition below, referring to a published dictionary of valid data items. The header items should be regarded as essential for ensuring forwards-compatibility are highlighted in bold. Endian can potentially have a default value (need to check if SiRF and u-blox are the same) and compression could have a default of zero. This leaves 4 absolutely essential header items to ensure forward + backward compatibility - frame identifier / size (2 bytes), checksum (2 bytes), version (2 bytes) and epoch (8 bytes) which total just 16 bytes.
+
+Results summaries have yet to be discussed in this document - e.g. best 2s, 10s, 500m, etc.
 
 
 
@@ -81,6 +83,8 @@ TOTAL = 23 bytes
 Notes:
 
 - The order of the elements has been chosen to ensure optimal byte alignments for the underlying types.
+- There are 8 fields in the SiRF example above which requires a single frame definition of 2 + 2 + 8 * 4 bytes = 36 bytes.
+- The frame definition (36 bytes) only appears once in the file and guarantees forward + backward compatibility. 36 bytes well spent.
 
 
 
@@ -105,10 +109,11 @@ Notes:
 
 - Some of these data items have a higher precision that the SiRF equivalent but this is easy to handle for the reader.
 - The order of the elements is the same as the SiRF example and also uses the optimal byte alignments.
+- There are 8 fields in the u-blox example above which requires a single frame definition of 2 + 2 + 8 * 4 bytes = 36 bytes.
 - SOG and sAcc are output by u-blox chipsets using 4 bytes but this example only uses 2 bytes:
   - This will result in a max SOG and sAcc values of 65.535 m/s, approximately ~130 knots.
   - TBC - What is the largest SOG and sAcc ever seen in a u-blox speedsurfing file?
-  
+
 
 
 
