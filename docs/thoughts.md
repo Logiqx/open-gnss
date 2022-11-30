@@ -28,6 +28,8 @@ I have no doubt that other fields will be required and they can be added over ti
 
 A header frame definition should be implemented (not documented yet) so that smaller headers can be used, when desired. This would work in a similar way to the GNSS Frame definition below, referring to a published dictionary of valid data items. The header items that should be regarded as essential for ensuring forwards-compatibility are highlighted in bold. Endian can potentially have a default value (need to check if SiRF and u-blox are the same) and compression could have a default of zero. This leaves 4 absolutely essential header items to ensure forward + backward compatibility - frame identifier / size (2 bytes), checksum (2 bytes), version (4 bytes) and epoch (8 bytes) which total just 16 bytes.
 
+If GNSS chipset manufacturer and GNSS chipset model are known (totaling 4 bytes) they should also be included so that fields such as SDOP and sAcc can be handled accordingly. This makes a minimal header containing only essential items a mere 20 bytes.
+
 Results summaries have yet to be discussed in this document - e.g. best 2s, 10s, 500m, etc.
 
 
