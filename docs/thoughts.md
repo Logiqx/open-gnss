@@ -16,7 +16,8 @@ A number of items will be required in the file header. These could include the f
 - Epoch = 8 byte timestamp for first GNSS frame with millisecond precision
 - Endian (big or little) so that native binary payloads from SiRF and u-blox chipsets can be used without modification
 - Compression type = 0x00 for potential future usage
-- GNSS chipset, if known (2 bytes) - e.g. 0x0000 = unknown, 0x0001 = SiRF, 0x02 = Trimble, 0x03 = u-blox, etc.
+- GNSS chipset manufacturer, if known (2 bytes) - e.g. 0x0000 = unknown, 0x0001 = SiRF, 0x0002 = Trimble, 0x0003 = u-blox, etc.
+- GNSS chipset model, if known (2 bytes) - e.g. 0x0000 = unknown, 0x0001 = SiRF Star II, 0x0002 = SirF Star III, etc.
 - Logging device manufacturer, if known (2 bytes) - e.g. 0x0000 = unspecified, 0x0001 = Locosys, etc.
 - Logging device name, if known (text) - e.g. "COROS APEX 2 Pro"
 - Logging device firmware, if known (text) - e.g. "2.73.0"
