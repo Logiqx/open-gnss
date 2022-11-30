@@ -32,4 +32,4 @@ Read the [documentation](https://logiqx.github.io/open-gnss/) for further detail
 
 If you are already familiar with the project goals, you can jump straight to implementation "thoughts and ideas" document:
 
-[Open GNSS - Thoughts and Ideas](https://logiqx.github.io/open-gnss/)
+[Open GNSS - Thoughts and Ideas](https://logiqx.github.io/open-gnss/thoughts.html)
