@@ -26,7 +26,7 @@ A number of items will be required in the file header. These could include the f
 
 I have no doubt that other fields will be required and they can be added over time in a non-breaking manner.
 
-A header frame definition should be implemented (not documented yet) so that smaller headers can be used, when desired. This would work in a similar way to the GNSS Frame definition below, referring to a published dictionary of valid data items. The header items should be regarded as essential for ensuring forwards-compatibility are highlighted in bold. Endian can potentially have a default value (need to check if SiRF and u-blox are the same) and compression could have a default of zero. This leaves 4 absolutely essential header items to ensure forward + backward compatibility - frame identifier / size (2 bytes), checksum (2 bytes), version (2 bytes) and epoch (8 bytes) which total just 16 bytes.
+A header frame definition should be implemented (not documented yet) so that smaller headers can be used, when desired. This would work in a similar way to the GNSS Frame definition below, referring to a published dictionary of valid data items. The header items that should be regarded as essential for ensuring forwards-compatibility are highlighted in bold. Endian can potentially have a default value (need to check if SiRF and u-blox are the same) and compression could have a default of zero. This leaves 4 absolutely essential header items to ensure forward + backward compatibility - frame identifier / size (2 bytes), checksum (2 bytes), version (4 bytes) and epoch (8 bytes) which total just 16 bytes.
 
 Results summaries have yet to be discussed in this document - e.g. best 2s, 10s, 500m, etc.
 
