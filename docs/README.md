@@ -6,7 +6,7 @@ If you've not read this particular document yet then it is recommended reading a
 
 If you are already familiar with the project goals, you can jump straight to implementation thoughts and ideas in separate document:
 
-- [Open GNSS - Thoughts and Ideas](thoughts.md)
+[Open GNSS - Thoughts and Ideas](thoughts.md)
 
 
 
@@ -134,7 +134,7 @@ Further details about these existing formats is provided on a separate [page](fo
 
 This is a community-wide initiative but the GitHub project and initial thoughts and ideas were created on GitHub by Michael George (K888). The open format needs to be devised, reviewed, discussed, tweaked and so forth. Early thoughts and ideas have been captured in separate document:
 
-- [Open GNSS - Thoughts and Ideas](thoughts.md)
+[Open GNSS - Thoughts and Ideas](thoughts.md)
 
 The above is by no means the finished article. It is simply the product of a few hours work and something of an in-depth brain dump.
 

@@ -24,5 +24,12 @@ In the longer term, adoption of this format will make development and support si
 
 The goal of this project is to develop an open format which is simple to implement and with an emphasis on compatibility (forward and backwards) so that files are able to store data specific to the underlying GNSS chipset and tailored to each specific individual use-case.
 
-Read the [documentation](https://logiqx.github.io/open-gnss/) for further details.
+Read the [documentation](https://logiqx.github.io/open-gnss/) for further details about project goals, etc.
 
+
+
+### In a Hurry?
+
+If you are already familiar with the project goals, you can jump straight to implementation "thoughts and ideas" document:
+
+[Open GNSS - Thoughts and Ideas](thoughts.md)
