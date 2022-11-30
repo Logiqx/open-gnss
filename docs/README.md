@@ -1,5 +1,15 @@
 ## Open GNSS Format
 
+### In a Hurry?
+
+If you've not read this particular document yet then it is recommended reading as way of background.
+
+If you are already familiar with the project goals, you can jump straight to implementation thoughts and ideas in separate document:
+
+- [Open GNSS - Thoughts and Ideas](thoughts.md)
+
+
+
 ### Introduction
 
 The GPS speedsurfing community have used a number of different GPS devices over the years, several of which have had their own proprietary file formats. Common file formats include:
