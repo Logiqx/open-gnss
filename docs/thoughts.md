@@ -39,32 +39,30 @@ GNSS frame definitions will detail the content of the GNSS frames:
 - Checksum = 2 bytes
 - Item specifications can use bit-packing to fit the following data into 4 bytes.
   - Field identifier (14 bits) from standard dictionary - e.g. 0x00 = ts, 0x01 = lon, 0x02 = lat, etc.
-  - Byte size (10 bits) of the GNSS frame payload. This excludes the frame identifier + size and checksum so it allows up to 1KB payloads.
-    - Actual value = payload size - 1
-  - Data type (4 bits) - signed integer, unsigned integer, bitfield, signed float, unsigned float, semicircles or text
+  - Byte size (10 bits) of the data item, allowing for individual data items up to 1024 bytes in size.
+    - Actual value = data value size - 1 (as per frame identifiers + sizes, described in detail later in this document)
+  - Data type (4 bits) - signed integer, unsigned integer, bitfield, signed float, unsigned float, semicircles or text.
   - Scaling (4 bits) - e.g. 1 x 10<sup>-7</sup> = 0x07 or 0x00 for no scaling.
 
 It should be noted that optimal byte alignment is retained for these frames because every item specification is exactly 4 bytes.
 
-Multiple frame types can appear in the open format (e.g. corresponding to individual NMEA sentences). The GNDD frame identifiers will be implicit, simply based on the order of frame definitions.
+Multiple frame types can be included in a file using the open GNSS format (e.g. corresponding to NMEA sentence types). The numerical GNSS frame identifiers will be implicit with the file, simply based on the order of frame definitions.
 
 
 
 ### GNSS Frames - Minimal Content
 
-This section illustrates how minimal SiRF and u-blox GNSS frames might be implemented:
+This section illustrates how minimal SiRF and u-blox GNSS frames might be implemented. Summary:
 
-- Simple to implement within the logging devices
-- Slightly more complex when reading the files but all possible variations can be handled by common code
-- The definition frames enable processing of SiRF and u-blox data in exactly the same way, despite differing endian and / or precisions
+- Simple to implement within logging devices with a low computational cost.
+- Slightly more complex when reading the files but all possible data type conversions can be achieved using simple, common code.
+- The definition frames facilitate the processing of SiRF and u-blox data in exactly the same way, despite differing endian, byte sizes and / or precisions.
 
-It's worth noting that byte offsets / alignments have been chosen to suit the underlying data types (e.g. 4 byte integers aligned with 4-byte boundaries).
-
-Failure to align data types properly can lead to sub-optimal processing, depending on the CPU architecture.
+It's worth noting that byte offsets / alignments have been chosen to suit the underlying data types (e.g. 4 byte integers aligned with 4-byte boundaries) Failure to align data types properly can lead to sub-optimal processing, depending on the CPU architecture.
 
 
 
-####  Minimal SiRF GNSS Frame
+####  Minimal GNSS Frame (SiRF)
 
 | Offset | Type |       Scaling       | Name  | Units | Description                          |
 | ------ | :--: | :-----------------: | :---: | :---: | ------------------------------------ |
@@ -87,7 +85,7 @@ Notes:
 
 
 
-####  Minimal u-blox GNSS Frame
+####  Minimal GNSS Frame (u-blox)
 
 | Offset | Type |       Scaling       | Name  | Units | Description                          |
 | ------ | :--: | :-----------------: | :---: | :---: | ------------------------------------ |
@@ -107,42 +105,52 @@ TOTAL = 29 bytes
 Notes:
 
 - The order of the elements has been chosen to ensure optimal byte alignments for the underlying types.
-- sAcc is output by u-blox chipsets using 4 bytes but this proposal suggests 2 bytes. This results in a max value of 65.535 m/s or ~130 knots.
-  - TBC - This 130 knot limit for sAcc must surely be acceptable. What is the largest sAcc ever seen in a u-blox file?
+- sAcc is output by u-blox chipsets using 4 bytes but this proposal suggests 2 bytes.
+  - This will result in a max sAcc value of 65.535 m/s, approximately ~130 knots.
+  - TBC - This 130 knot limit for sAcc must surely be acceptable? What is the largest sAcc ever seen in a u-blox file?
+  
 
 
 
 ### GNSS Frames - Full Payloads
 
-Detailed GNSS frames can by direct copies of binary payloads output by SiRF and u-blox chipsets.
+Detailed GNSS frames can by exact copies of the binary payloads output by SiRF and u-blox chipsets.
 
-The frame identifier and checksum are 4 bytes in total so byte-aligned SiRF / u-blox payloads will remain correctly aligned.
+The frame identifier and checksum are 4 bytes in total so the byte-alignment of SiRF / u-blox payloads will remain unchanged.
 
 | Offset | Type | Scaling | Name  | Units | Description               |
 | ------ | :--: | :-----: | :---: | :---: | ------------------------- |
 | 0      |  u2  |    -    |  id   |   -   | Frame identifier and size |
 | 2      |  u2  |    -    | cksum |   -   | Checksum                  |
-| ...    | ...  |   ...   |  ...  |  ...  | ...                       |
+| 4      | ...  |   ...   |  ...  |  ...  | ...                       |
 
 
 
 ### GNSS Frames - Custom Content
 
-Custom GNSS frames could be utilised by developers, adding additional data to the minimal content.
+Custom GNSS frames can be logged for development purposes and detailed analysis, simply adding data items to the minimal content.
 
-Example custom data items might include the following fields:
+Examples of more "unusual" data items which are not currently used for speed sailing:
 
-- elevation
+- elevation (ele)
 - rate of climb (roc)
-- NED velocities - north / east / down (down = opposite of roc)
+- NED velocities - north / east / down (down velocity = -1 * roc)
+  - Logged by the u-blox [FlySight](https://www.flysight.ca/) device used by skydivers.
+
 - VDOP, PDOP, TDOP, GDOP
+  - vertical, positional, time and geometric dilutions of precision
+
 - VSDOP / VSDOS
+  - SiRF accuracy data
+
 - hAcc / vAcc / tAcc
+  - u-blox accuracy data
+
 - satellite IDs
 - fix type
 - flags
 
-Since it is just a change to the GNSS frame definition, software that does not recognise such items can simply ignore them whilst loading the file.
+Since additional fields are just a change to the GNSS frame definition, reader software that does not recognise "unusual" data items can simply ignore them whilst parsing the data.
 
 
 
@@ -153,17 +161,17 @@ Since it is just a change to the GNSS frame definition, software that does not r
 Frame identifiers can specify the frame type and frame size, packed into 2 bytes.
 
 - Frame identifier = 6 bits which allows up to 64 different frame types, unique to a specific file
-- Frame size (excluding the identifier and checksum) = 10 bits which allows for 1KB payloads.
-  - Actual value = frame size - 1
+- Frame size (excluding the identifier and checksum) = 10 bits which allows for 1024 byte payloads.
+  - Actual value = frame size - 1 thus allowing for 1024 byte payloads
 
 
-It should be noted that any given frame type will always have the same first 2 bytes (identifer + size) throughout the file:
+It should be noted that any given frame type will always have the same first 2 bytes (identifer + size):
 
 - Header frame identifier (0x00 in upper 6 bits) + size
 - GNSS frame definition identifier (0x01 in upper 6 bits) + size
 - GNSS frame identifier (0x02 in upper 6 bits) + size
 
-File readers may wish to utilise the frame identifier and frame size to skip past frames that are of no interest / unsupported. This can be even be done without using the detailed field specifications in the GNSS frame definition(s).
+File readers may wish to utilise the frame identifier and frame size to skip past frames that are of no interest / unsupported. This can be even be done without interpreting the detailed field specifications in the GNSS frame definition(s).
 
 
 
@@ -176,7 +184,7 @@ A simple checksum algorithm is desired with minimal processing overhead, yet eff
 
 [Fletcher's checksum](https://en.wikipedia.org/wiki/Fletcher%27s_checksum) is well suited because of it's simple implementation and low computational overheads.
 
-It has the added benefit that existing C / Java / Python code within UBX and OAO readers can be re-used.
+This algorithm has the added benefit that existing C / Java / Python code used by UBX and OAO readers can be re-used.
 
 
 
@@ -210,18 +218,14 @@ The second option is suited to devices that are either likely to record continuo
 
 In theory, consumer GPS units are limited to 1000 knots which is approximately 514.44 m/s.
 
-- SiRF precision is 2 decimal places which means only 2 bytes are required for SOG. Limit is 65,535 = 655.35 m/s which exceeds 1,000 knots.
-- u-blox precision is 3 decimal places which means 2 bytes are insufficient for SOG. Either 3 or 4 bytes are therefore required.
+- SiRF precision is 2 decimal places so only 2 bytes are required for SOG. Limit is 65,535 = 655.35 m/s which exceeds 1,000 knots.
+- u-blox precision is 3 decimal places so 2 bytes are insufficient for SOG. Either 3 or 4 bytes are therefore required.
 
 
 
 #### Degrees vs Semicircles
 
-FIT files store latitude and longitude in semicircles.
-
-This is actually relatively pointless because standard precision GNSS chipsets output latitude and longitude as 4 byte integers with a scaling of 1 x 10<sup>-7</sup>.
-
-Converting the native output of the GNSS chip from degrees to semicircles may use the full 32-bit range but it does not add any precision!
+FIT files store latitude and longitude in semicircles This is actually relatively pointless because standard precision GNSS chipsets output latitude and longitude as 4 byte integers with a scaling of 1 x 10<sup>-7</sup>. Converting the native output of the GNSS chip from degrees to semicircles may use the full 32-bit range but it does not add any precision!
 
 Since semicircles are what are recorded in FIT files they should be perfectly preserved within the open format, using the dedicated semicircles data type.
 
@@ -231,9 +235,9 @@ Since semicircles are what are recorded in FIT files they should be perfectly pr
 
 High precision logging devices such as the u-blox NEO-M8P and ZED-F9P add the following items to record higher precision:
 
-- lonHp and latHp (1 byte each) which have a scaling of 1e-9.
+- lonHp (1 byte) and latHp (1 byte) add precision to the 10th of a millimeter and have a scaling of 1e-9.
 
-If such a device wished to log data in the open format they simply need to specify them in the GNSS frame definition.
+If a high precision device wishes to log data in the open format they simply need to specify these fields in the GNSS frame definition.
 
 
 
