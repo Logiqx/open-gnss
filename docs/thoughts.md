@@ -94,20 +94,20 @@ Notes:
 | 8      |  u4  | 1 x 10<sup>-7</sup> |  lat  |  deg  | Latitude                             |
 | 12     |  u4  | 1 x 10<sup>-7</sup> |  lon  |  deg  | Longitude                            |
 | 16     |  u4  | 1 x 10<sup>-3</sup> |  cog  |  deg  | Course Over Ground                   |
-| 20     |  u4  | 1 x 10<sup>-3</sup> |  sog  |  m/s  | Speed Over Ground                    |
-| 24     |  u2  | 1 x 10<sup>-3</sup> | sacc  |  m/s  | Speed accuracy                       |
-| 26     |  u2  | 2 x 10<sup>-2</sup> | hdop  |   -   | HDOP                                 |
-| 28     |  u1  |          -          |  sat  |   -   | Number of SVs                        |
+| 20     |  u2  | 1 x 10<sup>-3</sup> |  sog  |  m/s  | Speed Over Ground                    |
+| 22     |  u2  | 1 x 10<sup>-3</sup> | sacc  |  m/s  | Speed accuracy                       |
+| 24     |  u2  | 2 x 10<sup>-2</sup> | hdop  |   -   | HDOP                                 |
+| 26     |  u1  |          -          |  sat  |   -   | Number of SVs                        |
 
-TOTAL = 29 bytes
+TOTAL = 27 bytes
 
 Notes:
 
 - Some of these data items have a higher precision that the SiRF equivalent but this is easy to handle for the reader.
 - The order of the elements is the same as the SiRF example and also uses the optimal byte alignments.
-- sAcc is output by u-blox chipsets using 4 bytes but this example only uses 2 bytes:
-  - This will result in a max sAcc value of 65.535 m/s, approximately ~130 knots.
-  - TBC - This 130 knot limit for sAcc must surely be acceptable? What is the largest sAcc ever seen in a u-blox file?
+- SOG and sAcc are output by u-blox chipsets using 4 bytes but this example only uses 2 bytes:
+  - This will result in a max SOG and sAcc values of 65.535 m/s, approximately ~130 knots.
+  - TBC - What is the largest SOG and sAcc ever seen in a u-blox speedsurfing file?
   
 
 
