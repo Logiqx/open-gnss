@@ -192,3 +192,9 @@ There are also "in-between" options such as writing a parser that can only handl
 **Addendum #2**
 
 I still haven't considered the raw data of RTK / PPK. So far as I know it isn't and immediate requirement and worst case could be treated as a "major" update - e.g. 2.0.0.
+
+**Addendum #3**
+
+p.s. I learnt the importance of structure packing / byte alignment and endianness the hard way. Trying to port C code between different architectures can be incredible painful if these things aren't considered up front. Code that works fine on one platform can look fine, yet produce garbage on another platform or even result in memory faults. Problems are even more likely to occur when using binary structures that you think are fixed, reading straight from disk into memory. Code that looks like it "should" work simply doesn't because of compiler interventions.
+
+TLDR - Byte packing is important and relevant and which is why the UBX protocol addressed it explicitly. The same is true of endianness which I learnt the hard way when trying to use C code that worked fine on Motorola architectures yet failed spectacularly on Intel architectures. These are the kinds of problems that we can ensure don't happen with an open format. I guess a lot of people don't even know such problems are even a "thing". In the past it used to cause me a fair bit of work when writing C code for Motorola, Sparc, and Intel architectures.
