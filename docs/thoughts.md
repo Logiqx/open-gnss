@@ -2,6 +2,8 @@
 
 This is a community-wide initiative but the GitHub project and initial thoughts and ideas were created on GitHub by Michael George (K888). This is by no means the finished article. It is simply the product of a few hours work and is something of an in-depth brain dump.
 
+After a number of questions and responses, I've written an additional document to provide insights into a number of key design decisions. I've referred to them as the "[minutiae](minutiae.md)" but they have informed almost every decision. That's not to say that the document below doesn't contain any oversights!
+
 All feedback is welcome. Feel free to contact me via Seabreeze (or e-mail if you have it) and I will get back to you when time allows.
 
 
