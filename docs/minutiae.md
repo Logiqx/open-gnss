@@ -185,7 +185,10 @@ I don't feel we should take away the main benefits of the open format from those
 
 This initiative can easily ensure that data frames of the "minimal" format can be easily be read by a "lazy" parser. Such a parser only need skip the frame definitions (easy), skip the header frame (easy), then read the data frames (assuming a fixed format). This really is barely any harder than reading a file in the SBP format. The benefit of using the open format to its fullest is that software can take the "lazy" approach or write a fully-fledged generic parser.
 
-**Addendum**
+**Addendum #1**
 
 There are also "in-between" options such as writing a parser that can only handle the specific "endianness" relating to a particular file type - e.g. ESP "minimal". The same could be true of data types that do not match expectations. The software can just say "file type not supported", or suchlike. The key point is that the ESP project can do what they wish with an ESP "minimal" format. A "lazy" parser can be limited to parsing what is expected (perhaps doing a quick sanity check that it is as expected, such as checking the checksum of the trackpoint frame definition) whilst a full-fledged parser will be able to read the data regardless.
 
+**Addendum #2**
+
+I still haven't considered the raw data of RTK / PPK. So far as I know it isn't and immediate requirement and worst case could be treated as a "major" update - e.g. 2.0.0.
