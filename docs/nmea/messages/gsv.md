@@ -34,7 +34,7 @@ Prior to NMEA 4.10:
 | 4 + 4 \* idx | SV ID            | numeric     | 15      | Satellite ID or PRN number (leading zeros sent)              |
 | 5 + 4 \* idx | Elevation        | numeric     | 80      | Elevation in degrees (leading zeros sent); 00 to 90          |
 | 6 + 4 \* idx | Azimuth          | numeric     | 234     | Azimuth in degrees to true north (leading zeros sent); 000 to 359 |
-| 7 + 4 \* idx | C/N<sub>0</sub>  | numeric     | 47      | Carrier to noise density in db-Hz; range 00-99 or null (empty) when not tracking |
+| 7 + 4 \* idx | C/N<sub>0</sub>  | numeric     | 47      | Carrier-to-noise density ratio in db-Hz; range 00-99 or null (empty) when not tracking |
 | -            | # End of block   | -           | -       | End of repeated block (N times)                              |
 | n-1          | Signal ID        | hexadecimal | 1       | GNSS [signal ID](../lookups/signal-id.md) (NMEA 4.10 and later) |
 | n            | Checksum         | hexadecimal | \*7B    | Checksum                                                     |
@@ -43,7 +43,7 @@ Notes:
 
 - Receivers may emit more than 12 quadruples (more than three GSV sentences), even though NMEA-0813 doesn’t allow this.
 - The final sentence may include data for less than 4 satellites, if the number of visible satellites is not divisible by 4.
-- It is not entirely clear whether GSV reports carrier-to-noise density (C/N<sub>0</sub>) in dB-Hz or signal-to-noise ratio (SNR) - see related [article](https://insidegnss.com/measuring-gnss-signal-strength/).
+- GSV sentences include carrier-to-noise density ratio (C/N<sub>0</sub>) for each SV in dB-Hz. See related [article](https://insidegnss.com/measuring-gnss-signal-strength/) for further information.
 - The GNSS [signal ID](../lookups/signal-id.md) was added in NMEA 4.10.
 
 
