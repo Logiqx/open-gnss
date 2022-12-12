@@ -1,4 +1,4 @@
-## GSA - Global Satellites Active
+## GSA - GNSS DOP and Active Satellites
 
 ### Summary
 

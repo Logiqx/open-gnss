@@ -10,11 +10,11 @@ The GNSS system identifier (aka "system ID") was added to several messages in NM
 
 System ID was added to the following messages in NMEA 4.10:
 
-| Message ID                | Description              |
-| ------------------------- | ------------------------ |
-| GBS                       |                          |
-| GRS                       |                          |
-| [GSA](../messages/gsa.md) | Global Satellites Active |
+| Message ID                | Description                    |
+| ------------------------- | ------------------------------ |
+| GBS                       |                                |
+| GRS                       |                                |
+| [GSA](../messages/gsa.md) | GNSS DOP and Active Satellites |
 
 
 

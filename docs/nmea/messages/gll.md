@@ -1,4 +1,4 @@
-## GLL - Global Positioning System Fix Data
+## GLL - Geographic Position - Latitude / Longitude
 
 ### Summary
 
@@ -37,6 +37,7 @@ Prior to NMEA 2.3:
 Notes:
 
 - The [positioning mode](../lookups/pos-mode.md) indicator (field 7) was added for the FAA in NMEA 2.3.
+- The [navigational status](../lookups/nav-status.md) indicator (not listed above) may have been added in NMEA 4.10. TBC
 
 
 

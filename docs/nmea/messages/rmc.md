@@ -1,4 +1,4 @@
-## RMC - Recommended Minimum Sentence C
+## RMC - Recommended Minimum GNSS Data
 
 ### Summary
 

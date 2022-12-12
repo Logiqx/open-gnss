@@ -1,4 +1,4 @@
-## GSV - Global Satellites in View
+## GSV - GNSS Satellites in View
 
 ### Summary
 
@@ -44,7 +44,7 @@ Notes:
 - Receivers may emit more than 12 quadruples (more than three GSV sentences), even though NMEA-0813 doesn’t allow this.
 - The final sentence may include data for less than 4 satellites, if the number of visible satellites is not divisible by 4.
 - It is not entirely clear whether GSV reports carrier-to-noise density (C/N<sub>0</sub>) in dB-Hz or signal-to-noise ratio (SNR) - see related [article](https://insidegnss.com/measuring-gnss-signal-strength/).
-- The GNSS signal ID was added in NMEA 4.10.
+- The GNSS [signal ID](../lookups/signal-id.md) was added in NMEA 4.10.
 
 
 

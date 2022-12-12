@@ -14,13 +14,13 @@ The order of the characters indicates the systems; GPS, GLONASS, Galileo, BeiDou
 
 The positioning mode indicator is used by the following messages:
 
-| Message ID                | Description                        |
-| ------------------------- | ---------------------------------- |
-| [GLL](../messages/gll.md) | Global Positioning System Fix Data |
-| GNS                       |                                    |
-| RMB                       |                                    |
-| [RMC](../messages/rmc.md) | Recommended Minimum Sentence C     |
-| [VTG](../messages/vtg.md) | Velocity and Track Made Good       |
+| Message ID                | Description                                |
+| ------------------------- | ------------------------------------------ |
+| [GLL](../messages/gll.md) | Geographic Position - Latitude / Longitude |
+| GNS                       |                                            |
+| RMB                       |                                            |
+| [RMC](../messages/rmc.md) | Recommended Minimum GNSS Data              |
+| [VTG](../messages/vtg.md) | Velocity and Track Made Good               |
 
 
 
@@ -37,7 +37,7 @@ Positioning modes supported by NMEA:
 | F | RTK float mode |
 | M | Manual input mode |
 | N | Data not valid. Either constellation not in use, or no valid fix |
-| P | Precise (NMEA 4.00 and later). No degradation, like SA, and hires |
+| P | Precise (NMEA 4.10 and later).<br />No deliberate degradation (e.g. SA), and using hi-res fix (e.g. P-code).<br />Also signifies multi-frequency, SBAS or Precise Point Positioning (PPP). |
 | R | RTK integer mode, or using "course position" from almanac (SiRF) <sup>1</sup> |
 | S |  Simulator mode |
 | U | Unsafe (Quectel Querk) |
