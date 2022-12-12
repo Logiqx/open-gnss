@@ -18,7 +18,6 @@ The positioning mode indicator is used by the following messages:
 | ------------------------- | ------------------------------------------ |
 | [GLL](../messages/gll.md) | Geographic Position - Latitude / Longitude |
 | GNS                       |                                            |
-| RMB                       |                                            |
 | [RMC](../messages/rmc.md) | Recommended Minimum GNSS Data              |
 | [VTG](../messages/vtg.md) | Velocity and Track Made Good               |
 
